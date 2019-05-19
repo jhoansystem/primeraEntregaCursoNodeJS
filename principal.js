@@ -90,25 +90,35 @@ else
 
 
 	let cursoInscribir = cursos.find( curso => curso.id == argv.id);
-	console.log(cursoInscribir);
 
-	let Resultados='El estudiante: '+argv.nombre+'\n'+
-						'con cedula: '+argv.cedula+'\n'+
-						'El curso se llama: '+cursoInscribir.nombre+'\n'+
-						'Tiene una duración de : '+cursoInscribir.horas+'\n'+
-						'Tiene un valor de : '+cursoInscribir.valor+'\n'+
-						'Id de inscripción es: '+cursoInscribir.id+'\n'+
-						'############################################'+'\n'+
-						'############################################'
-	fs.writeFile('matricula.txt',Resultados,(err)=>{
-		if(err) throw(err);
+	if( cursoInscribir==null)
+	{
+		console.log('\nHa ingresado un Id que no corresponde a ningun curso\n');
+		imprimir(cursos)
+	}
+	else
+	{
 
-		console.log('El archivo se ha creado exitosamente "matricula.txt"');
-		console.log('Con el siguiente texto');
-		console.log('############################################'+'\n'+
-						'############################################')
-		console.log(Resultados);
-	})
+		//console.log(cursoInscribir);
+
+		let Resultados='\nEl estudiante: '+argv.nombre+'\n'+
+							'con cedula: '+argv.cedula+'\n\n'+
+							'El curso se llama: '+cursoInscribir.nombre+'\n'+
+							'Tiene una duración de : '+cursoInscribir.horas+'\n'+
+							'Tiene un valor de : '+cursoInscribir.valor+'\n'+
+							'Id de inscripción es: '+cursoInscribir.id+'\n'+
+							'############################################'+'\n'+
+							'############################################\n'
+		fs.writeFile('matricula.txt',Resultados,(err)=>{
+			if(err) throw(err);
+
+			console.log('\n\nEl archivo se ha creado exitosamente "matricula.txt"');
+			console.log('Con el siguiente texto\n\n');
+			console.log('############################################'+'\n'+
+							'############################################')
+			console.log(Resultados);
+		})
+	}
 }
 
 
